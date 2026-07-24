@@ -6,7 +6,7 @@ import axios from "axios";
  * Production  : https://your-backend.koyeb.app
  */
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001",
+  baseURL: "",
   timeout: 15000,
   headers: { "Content-Type": "application/json" },
 });
@@ -50,7 +50,7 @@ function mapToUiShape(data) {
  * @throws {Error} with a user-friendly message on failure.
  */
 export async function fetchVideoInfo(url) {
-  const { data } = await api.post("/api/download", { url });
+  const { data } = await api.post("/api/download", { url });  // proxied via Next.js API route
 
   if (!data.success) {
     throw new Error(data.message || "Failed to fetch video.");
