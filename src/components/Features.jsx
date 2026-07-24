@@ -11,39 +11,39 @@ const FEATURES = [
     color: "#FE2C55",
     bg:    "rgba(254,44,85,0.08)",
     glow:  "rgba(254,44,85,0.12)",
-    title: "Lightning Fast",
-    desc:  "Download videos in seconds with our optimized pipeline. No waiting, no queues.",
+    title: "Fast",
+    desc:  "Usually done in under 3 seconds. No queue, no waiting around.",
   },
   {
     icon:  <Film size={20} />,
     color: "#25F4EE",
     bg:    "rgba(37,244,238,0.08)",
     glow:  "rgba(37,244,238,0.12)",
-    title: "HD Quality",
-    desc:  "Get the original video quality — up to 1080p HD — without any compression.",
+    title: "Original Quality",
+    desc:  "Downloads the original file — no re-encoding, no quality loss.",
   },
   {
     icon:  <ShieldCheck size={20} />,
     color: "#a78bfa",
     bg:    "rgba(167,139,250,0.08)",
     glow:  "rgba(167,139,250,0.12)",
-    title: "100% Secure",
-    desc:  "We never store your videos or personal data. Processed and discarded instantly.",
+    title: "Private",
+    desc:  "We don't log URLs or store anything. Your downloads stay yours.",
   },
   {
     icon:  <Globe size={20} />,
     color: "#34d399",
     bg:    "rgba(52,211,153,0.08)",
     glow:  "rgba(52,211,153,0.12)",
-    title: "Unlimited",
-    desc:  "No daily limits, no subscriptions, no sign-ups. Forever free.",
+    title: "No Limits",
+    desc:  "No account, no daily cap, no paywall. Just works.",
   },
 ];
 
 const STEPS = [
-  { step: "01", title: "Copy TikTok Link",  desc: "Open TikTok, find the video, tap Share → Copy Link." },
-  { step: "02", title: "Paste the Link",    desc: "Paste the copied URL into the SnapDin input box." },
-  { step: "03", title: "Download",          desc: "Choose your format and hit download. Done in seconds." },
+  { step: "01", title: "Copy the link",   desc: "Open TikTok, tap Share on any video, then Copy Link." },
+  { step: "02", title: "Paste it here",   desc: "Drop the URL into the input box above." },
+  { step: "03", title: "Pick your format", desc: "Choose video, audio, or cover image — then download." },
 ];
 
 /* ── 3D tilt feature card ──────────────────────────────────── */
@@ -180,11 +180,11 @@ export default function Features() {
               Why SnapDin
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Everything you need,{" "}
-              <span className="gradient-text">nothing you don't</span>
+              Simple tools,{" "}
+              <span className="gradient-text">no fluff</span>
             </h2>
             <p className="text-[#71717A] max-w-xl mx-auto text-sm sm:text-base">
-              Built for speed, privacy, and simplicity. No bloat, no ads, no nonsense.
+              No ads, no popups, no account needed. Just paste and download.
             </p>
           </motion.div>
 
@@ -211,12 +211,11 @@ export default function Features() {
                 How It Works
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Three steps to{" "}
-                <span className="gradient-text">your download</span>
+                How it{" "}
+                <span className="gradient-text">works</span>
               </h2>
               <p className="text-[#71717A] text-sm sm:text-base leading-relaxed">
-                SnapDin makes downloading TikTok videos effortless. No technical
-                knowledge required — just paste and download.
+                Three steps and you're done. No technical knowledge needed.
               </p>
             </motion.div>
 

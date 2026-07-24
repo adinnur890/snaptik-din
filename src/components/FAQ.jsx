@@ -6,28 +6,28 @@ import { Plus } from "lucide-react";
 
 const FAQS = [
   {
-    q: "Is SnapDin free to use?",
-    a: "Yes, SnapDin is completely free. There are no hidden fees, no subscriptions, and no account required. Download as many TikTok videos as you want at no cost.",
+    q: "Is it free?",
+    a: "Yes, completely free. No hidden fees, no subscription, no account needed.",
   },
   {
-    q: "Does it work on mobile devices?",
-    a: "Absolutely. SnapDin is built mobile-first and works seamlessly on iOS, Android, and any modern browser. The interface adapts perfectly to any screen size.",
+    q: "Does it work on mobile?",
+    a: "Yes. Works on iOS, Android, and any modern browser.",
   },
   {
     q: "Can I download TikTok slideshows?",
-    a: "Yes! SnapDin supports TikTok photo slideshows in addition to regular videos. You can download individual images or the full slideshow as a video.",
+    a: "Yes, photo slideshows are supported alongside regular videos.",
   },
   {
-    q: "Do I need to create an account?",
-    a: "No account, no sign-up, no email required. Just paste the TikTok URL and download. We believe in zero-friction tools.",
+    q: "Do I need to sign up?",
+    a: "No. Just paste the URL and download. That's it.",
   },
   {
-    q: "What formats can I download?",
-    a: "SnapDin supports HD video without watermark, video with watermark, MP3 audio extraction, and cover image (thumbnail) download.",
+    q: "What formats are available?",
+    a: "HD video without watermark, video with watermark, MP3 audio, and cover image.",
   },
   {
     q: "Is my data safe?",
-    a: "We never store your videos, URLs, or any personal data. All processing happens in real-time and is discarded immediately after your download completes.",
+    a: "We don't store URLs or videos. Everything is processed in real-time and discarded immediately.",
   },
 ];
 
