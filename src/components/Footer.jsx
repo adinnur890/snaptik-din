@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, GitFork, ArrowUp } from "lucide-react";
+import { Zap, Coffee, ArrowUp } from "lucide-react";
 
 /* ── Nav data ──────────────────────────────────────────────── */
 const COLUMNS = [
@@ -26,8 +26,8 @@ const COLUMNS = [
   {
     heading: "Support",
     links: [
-      { label: "Contact", href: "/contact",                    type: "page" },
-      { label: "GitHub",  href: "https://github.com/adinnur890", type: "external" },
+      { label: "Contact", href: "/contact", type: "page" },
+      { label: "Saweria",  href: "https://saweria.co/snapdin", type: "external" },
     ],
   },
 ];
@@ -159,17 +159,16 @@ export default function Footer() {
                 Download TikTok videos without watermark. Fast, free, no account needed.
               </p>
 
-              {/* GitHub social icon */}
               <motion.a
-                href="https://github.com/adinnur890"
+                href="https://saweria.co/snapdin"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub"
+                aria-label="Saweria"
                 whileHover={{ scale: 1.1, y: -1 }}
                 transition={{ duration: 0.15 }}
-                className="inline-flex w-9 h-9 rounded-lg border border-[#27272A] items-center justify-center text-[#71717A] hover:text-white hover:border-[#3F3F46] hover:bg-[#111111] transition-colors duration-200"
+                className="inline-flex w-9 h-9 rounded-lg border border-[#27272A] items-center justify-center text-[#f59e0b] hover:text-white hover:border-[#3F3F46] hover:bg-[#111111] transition-colors duration-200"
               >
-                <GitFork size={15} />
+                <Coffee size={15} />
               </motion.a>
             </div>
 
@@ -193,16 +192,7 @@ export default function Footer() {
           {/* ── Bottom bar ── */}
           <div className="border-t border-[#27272A]/60 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-[#3F3F46] text-center sm:text-left">
-              © 2026 SnapDin. Built with Next.js by{" "}
-              <a
-                href="https://github.com/adinnur890"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#52525B] hover:text-[#A1A1AA] transition-colors"
-              >
-                Din Developer
-              </a>
-              .
+              © 2026 SnapDin. Built with Next.js by Din Developer.
             </p>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-[#27272A] bg-[#111111] text-[10px] font-mono text-[#52525B]">
               v1.0.0

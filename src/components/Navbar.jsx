@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { GitFork, Menu, Zap } from "lucide-react";
+import { Coffee, Menu, Zap } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Features", href: "#features", type: "anchor" },
@@ -98,14 +98,14 @@ export default function Navbar() {
           {/* Right side */}
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com/adinnur890"
+              href="https://saweria.co/snapdin"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 px-3.5 py-1.5 text-sm font-medium text-white border border-[#27272A] rounded-lg hover:border-[#3F3F46] hover:bg-[#111111] transition-all duration-200 focus-ring"
-              aria-label="View on GitHub"
+              aria-label="Dukung SnapDin"
             >
-              <GitFork size={15} />
-              GitHub
+              <Coffee size={15} />
+              Saweria
             </a>
 
             {/* Mobile menu toggle — Menu icon only, no X */}
@@ -146,13 +146,13 @@ export default function Navbar() {
               ))}
               <li className="pt-2 border-t border-[#27272A] mt-2">
                 <a
-                  href="https://github.com/adinnur890"
+                  href="https://saweria.co/snapdin"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-white hover:bg-[#111111] rounded-lg transition-colors focus-ring"
                 >
-                  <GitFork size={16} />
-                  View on GitHub
+                  <Coffee size={16} />
+                  Dukung SnapDin ☕
                 </a>
               </li>
             </ul>
