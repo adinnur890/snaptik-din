@@ -16,7 +16,42 @@ const DOWNLOAD_ICONS = {
   cover:        <ImageIcon size={14} />,
 };
 
-function DownloadButton({ item, videoTitle }) {
+function showShareOptions(videoTitle, videoUrl) {
+  const text = `Download video TikTok gratis tanpa watermark di SnapDin! 🎵\n${videoUrl || ""}`;
+  const encoded = encodeURIComponent(text);
+  toast(
+    <div className="flex flex-col gap-2">
+      <p className="text-sm font-medium text-white">Share video ini</p>
+      <div className="flex gap-2">
+        <a
+          href={`https://wa.me/?text=${encoded}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#25D366] text-white text-xs font-medium hover:opacity-90 transition-opacity"
+        >
+          WhatsApp
+        </a>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encoded}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#1DA1F2] text-white text-xs font-medium hover:opacity-90 transition-opacity"
+        >
+          Twitter/X
+        </a>
+        <button
+          onClick={() => { navigator.clipboard.writeText(videoUrl || window.location.href); toast.success("Link disalin!"); }}
+          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#27272A] text-white text-xs font-medium hover:bg-[#3F3F46] transition-colors"
+        >
+          Copy Link
+        </button>
+      </div>
+    </div>,
+    { duration: 10000 }
+  );
+}
+
+function DownloadButton({ item, videoTitle, videoUrl }) {
   const isPrimary = item.type === "no_watermark";
   const [progress, setProgress] = useState(null); // null = idle, 0-100 = downloading
 
@@ -49,7 +84,14 @@ function DownloadButton({ item, videoTitle }) {
       a.click();
       URL.revokeObjectURL(a.href);
       setProgress(null);
-      toast.success("Download selesai!", { description: item.label });
+      toast.success("Download selesai!", {
+        description: item.label,
+        duration: 8000,
+        action: {
+          label: "Share",
+          onClick: () => showShareOptions(videoTitle, videoUrl),
+        },
+      });
     };
 
     xhr.onerror = () => {
@@ -115,7 +157,7 @@ function DownloadButton({ item, videoTitle }) {
 
 export default function ResultCard({ data }) {
   if (!data) return null;
-  const { title, author, thumbnail, duration, views, likes, shares, downloads } = data;
+  const { title, author, thumbnail, duration, views, likes, shares, downloads, videoUrl } = data;
 
   return (
     <motion.div
@@ -188,7 +230,7 @@ export default function ResultCard({ data }) {
             Download Options
           </p>
           {downloads.map((item) => (
-            <DownloadButton key={item.type} item={item} videoTitle={title} />
+            <DownloadButton key={item.type} item={item} videoTitle={title} videoUrl={videoUrl} />
           ))}
         </div>
       </div>

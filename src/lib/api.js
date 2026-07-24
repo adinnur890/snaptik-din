@@ -22,6 +22,7 @@ function mapToUiShape(data) {
     title:     data.title,
     thumbnail: data.thumbnail,
     duration:  data.duration,
+    videoUrl:  data.videoUrl || '',
     // Backend doesn't return social stats yet — hide them gracefully
     views:  null,
     likes:  null,
