@@ -28,7 +28,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://snapdin.app",
+    url: "https://snaptik-din.vercel.app",
     siteName: "SnapDin",
     title: "SnapDin — Download TikTok Videos Without Watermark",
     description:
