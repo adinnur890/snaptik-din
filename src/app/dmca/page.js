@@ -10,7 +10,7 @@ export default function DmcaPage() {
   return (
     <ComingSoonPage
       title="DMCA Policy"
-      description="Our DMCA takedown policy is being prepared. We respect intellectual property rights and will respond to all valid requests."
+      description="We respect intellectual property. DMCA policy coming soon."
     >
       <FileWarning size={28} className="text-white" />
     </ComingSoonPage>

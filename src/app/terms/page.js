@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <ComingSoonPage
       title="Terms of Use"
-      description="Our terms of use are currently being written. They will outline how you can use SnapDin fairly and responsibly."
+      description="Terms of use are being written. Use SnapDin responsibly."
     >
       <ScrollText size={28} className="text-white" />
     </ComingSoonPage>

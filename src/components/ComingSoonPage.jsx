@@ -81,11 +81,11 @@ export default function ComingSoonPage({ title, description, children }) {
           className="glass rounded-2xl px-8 py-6 max-w-sm w-full"
         >
           <p className="text-sm text-[#71717A] leading-relaxed">
-            We&apos;re working on this page. Check back soon or{" "}
+            Still being worked on.{" "}
             <Link href="/contact" className="text-[#25F4EE] hover:text-white transition-colors">
-              contact us
+              Contact us
             </Link>{" "}
-            if you have any questions.
+            if you have questions.
           </p>
         </motion.div>
       </main>

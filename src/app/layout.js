@@ -24,7 +24,7 @@ export const metadata = {
     shortcut: "/icon.svg",
     apple:   "/icon.svg",
   },
-  metadataBase: new URL("https://snapdin.app"),
+  metadataBase: new URL("https://snaptik-din.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",

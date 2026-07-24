@@ -149,13 +149,13 @@ export default function ContactPage() {
         <motion.div {...fadeUp(0.05)} className="mb-14 text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border border-[#27272A] bg-[#111111]/80 text-[#A1A1AA] mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[#25F4EE] animate-pulse" />
-            We typically respond within 24 hours
+            Usually reply within 24h
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            Contact <span className="gradient-text">SnapDin</span>
+            Get in <span className="gradient-text">touch</span>
           </h1>
           <p className="text-[#A1A1AA] text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Need help? Get in touch with us through any of the channels below.
+            Have a question or found a bug? Reach out through any channel below.
           </p>
         </motion.div>
 
@@ -178,11 +178,10 @@ export default function ContactPage() {
             <GitFork size={22} className="text-white" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Find us on GitHub
+            Open source on GitHub
           </h2>
           <p className="text-[#A1A1AA] text-sm sm:text-base max-w-md mx-auto mb-7 leading-relaxed">
-            Browse the source code, open issues, or contribute to SnapDin.
-            All development happens in the open.
+            Found a bug or want to contribute? Everything is open.
           </p>
           <a
             href="https://github.com/adinnur890"

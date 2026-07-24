@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <ComingSoonPage
       title="Privacy Policy"
-      description="Our privacy policy is being drafted. We take your privacy seriously and will publish a clear, transparent policy soon."
+      description="We don't collect or sell your data. Full policy coming soon."
     >
       <ShieldCheck size={28} className="text-white" />
     </ComingSoonPage>
