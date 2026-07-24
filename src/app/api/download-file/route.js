@@ -4,7 +4,6 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const url = searchParams.get('url');
   const filename = searchParams.get('filename') || 'snapdin_video';
-
   const hd = searchParams.get('hd') || '1';
 
   if (!url) return NextResponse.json({ error: 'Missing url' }, { status: 400 });
@@ -17,11 +16,16 @@ export async function GET(request) {
     headers: { 'X-Quality': 'hd', 'X-HD': '1' },
   });
 
-  const headers = new Headers();
-  headers.set('Content-Disposition', res.headers.get('Content-Disposition') || `attachment; filename="${filename}"`);
-  headers.set('Content-Type', res.headers.get('Content-Type') || 'application/octet-stream');
-  const contentLength = res.headers.get('Content-Length');
-  if (contentLength) headers.set('Content-Length', contentLength);
+  const buffer = await res.arrayBuffer();
+  const contentType = res.headers.get('Content-Type') || 'video/mp4';
+  const contentDisposition = res.headers.get('Content-Disposition') || `attachment; filename="${filename}.mp4"`;
 
-  return new NextResponse(res.body, { status: res.status, headers });
+  return new NextResponse(buffer, {
+    status: 200,
+    headers: {
+      'Content-Type': contentType,
+      'Content-Disposition': contentDisposition,
+      'Content-Length': buffer.byteLength.toString(),
+    },
+  });
 }
