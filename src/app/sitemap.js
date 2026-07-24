@@ -1,5 +1,3 @@
-import { MetadataRoute } from 'next';
-
 export default function sitemap() {
   const base = 'https://snaptik-din.vercel.app';
   return [
