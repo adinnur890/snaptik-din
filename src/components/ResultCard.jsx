@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -16,9 +17,10 @@ const DOWNLOAD_ICONS = {
 
 function DownloadButton({ item, videoTitle }) {
   const isPrimary = item.type === "no_watermark";
+  const [progress, setProgress] = useState(null); // null = idle, 0-100 = downloading
 
   const handleClick = () => {
-    if (!item.url || item.url === "#") return;
+    if (!item.url || item.url === "#" || progress !== null) return;
 
     const params = new URLSearchParams({
       url:      item.url,
@@ -26,14 +28,42 @@ function DownloadButton({ item, videoTitle }) {
       hd:       '1',
     });
 
-    window.open(`/api/download-file?${params}`, "_blank", "noopener,noreferrer");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `/api/download-file?${params}`);
+    xhr.responseType = "blob";
+
+    setProgress(0);
+
+    xhr.onprogress = (e) => {
+      if (e.lengthComputable) setProgress(Math.round((e.loaded / e.total) * 100));
+      else setProgress(-1); // indeterminate
+    };
+
+    xhr.onload = () => {
+      const blob = xhr.response;
+      const ext  = item.url.match(/\.(mp4|mp3|jpg|jpeg|png|webp)/i)?.[1] || (item.type === "mp3" ? "mp3" : "mp4");
+      const a    = document.createElement("a");
+      a.href     = URL.createObjectURL(blob);
+      a.download = `snapdin_${item.type}_${videoTitle || "video"}.${ext}`.slice(0, 64);
+      a.click();
+      URL.revokeObjectURL(a.href);
+      setProgress(null);
+    };
+
+    xhr.onerror = () => setProgress(null);
+    xhr.send();
   };
+
+  const isDownloading = progress !== null;
+  const isIndeterminate = progress === -1;
+  const displayProgress = isIndeterminate ? 60 : progress; // animate at 60% if indeterminate
 
   return (
     <motion.button
-      whileHover={{ scale: 1.015, y: -1, transition: { duration: 0.15 } }}
-      whileTap={{ scale: 0.985, y: 1 }}
+      whileHover={!isDownloading ? { scale: 1.015, y: -1, transition: { duration: 0.15 } } : {}}
+      whileTap={!isDownloading ? { scale: 0.985, y: 1 } : {}}
       onClick={handleClick}
+      disabled={isDownloading}
       className={`flex items-center justify-between gap-2 w-full px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-200 focus-ring relative overflow-hidden ${
         isPrimary
           ? "btn-gradient shimmer-wrap"
@@ -46,11 +76,34 @@ function DownloadButton({ item, videoTitle }) {
       }
       aria-label={`Download ${item.label}`}
     >
-      <span className="flex items-center gap-2">
-        {DOWNLOAD_ICONS[item.type]}
-        {item.label}
+      {/* Progress fill */}
+      {isDownloading && (
+        <motion.span
+          aria-hidden="true"
+          className="absolute inset-0 origin-left"
+          style={{ background: isPrimary ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.06)" }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: displayProgress / 100 }}
+          transition={isIndeterminate
+            ? { duration: 1.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
+            : { duration: 0.3, ease: "easeOut" }
+          }
+        />
+      )}
+
+      <span className="flex items-center gap-2 relative z-10">
+        {isDownloading ? (
+          <motion.span
+            className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 0.7, repeat: Infinity, ease: "linear" }}
+          />
+        ) : DOWNLOAD_ICONS[item.type]}
+        {isDownloading ? (isIndeterminate ? "Downloading..." : `Downloading ${progress}%`) : item.label}
       </span>
-      <span className="text-xs text-[#71717A] font-normal">{item.quality}</span>
+      <span className="text-xs text-[#71717A] font-normal relative z-10">
+        {isDownloading ? "" : item.quality}
+      </span>
     </motion.button>
   );
 }
