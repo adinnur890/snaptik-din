@@ -24,6 +24,7 @@ export const metadata = {
     shortcut: "/icon.svg",
     apple:   "/icon.svg",
   },
+  manifest: "/manifest.json",
   metadataBase: new URL("https://snaptik-din.vercel.app"),
   openGraph: {
     type: "website",
@@ -63,6 +64,17 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
+      <head>
+        <meta name="theme-color" content="#FE2C55" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="SnapDin" />
+        <script dangerouslySetInnerHTML={{ __html: `
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+          }
+        `}} />
+      </head>
       <body className="min-h-screen bg-[#09090B] text-white overflow-x-hidden">
         {children}
         <Toaster
