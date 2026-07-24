@@ -113,7 +113,7 @@ export default function DownloadBox({ onResult }) {
                 type="button"
                 onClick={handlePaste}
                 disabled={loading}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-[#71717A] hover:text-white border border-white/8 hover:border-white/14 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-200 flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed focus-ring"
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-[#71717A] hover:text-white border border-white/8 hover:border-white/14 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-200 flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed focus-ring"
                 aria-label="Paste from clipboard"
               >
                 <ClipboardPaste size={12} />
