@@ -20,6 +20,8 @@ export async function GET(request) {
   const headers = new Headers();
   headers.set('Content-Disposition', res.headers.get('Content-Disposition') || `attachment; filename="${filename}"`);
   headers.set('Content-Type', res.headers.get('Content-Type') || 'application/octet-stream');
+  const contentLength = res.headers.get('Content-Length');
+  if (contentLength) headers.set('Content-Length', contentLength);
 
   return new NextResponse(res.body, { status: res.status, headers });
 }
