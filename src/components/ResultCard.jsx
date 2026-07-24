@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import Image from "next/image";
 import {
   Download, Music, Image as ImageIcon,
@@ -48,9 +49,13 @@ function DownloadButton({ item, videoTitle }) {
       a.click();
       URL.revokeObjectURL(a.href);
       setProgress(null);
+      toast.success("Download selesai!", { description: item.label });
     };
 
-    xhr.onerror = () => setProgress(null);
+    xhr.onerror = () => {
+      setProgress(null);
+      toast.error("Download gagal. Coba lagi.");
+    };
     xhr.send();
   };
 
