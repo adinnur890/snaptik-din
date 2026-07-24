@@ -58,9 +58,13 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
   const handleClick = () => {
     if (!item.url || item.url === "#" || progress !== null) return;
 
+    const extMap = { no_watermark: 'mp4', watermark: 'mp4', mp3: 'mp3', cover: 'jpg' };
+    const ext = extMap[item.type] || 'mp4';
+    const filename = `snapdin_${item.type}_${videoTitle || "video"}.${ext}`.slice(0, 64);
+
     const params = new URLSearchParams({
       url:      item.url,
-      filename: `snapdin_${item.type}_${videoTitle || "video"}`.slice(0, 60),
+      filename: filename.replace(`.${ext}`, ''),
       hd:       '1',
     });
 
@@ -72,17 +76,17 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
 
     xhr.onprogress = (e) => {
       if (e.lengthComputable) setProgress(Math.round((e.loaded / e.total) * 100));
-      else setProgress(-1); // indeterminate
+      else setProgress(-1);
     };
 
     xhr.onload = () => {
-      const blob = xhr.response;
-      const extMap = { no_watermark: 'mp4', watermark: 'mp4', mp3: 'mp3', cover: 'jpg' };
-      const ext  = extMap[item.type] || 'mp4';
-      const a    = document.createElement("a");
-      a.href     = URL.createObjectURL(blob);
-      a.download = `snapdin_${item.type}_${videoTitle || "video"}.${ext}`.slice(0, 64);
+      const blob = new Blob([xhr.response], { type: item.type === 'mp3' ? 'audio/mpeg' : item.type === 'cover' ? 'image/jpeg' : 'video/mp4' });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(a.href);
       setProgress(null);
       toast.success("Download selesai!", {
