@@ -62,14 +62,11 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
     const ext = extMap[item.type] || 'mp4';
     const filename = `snapdin_${item.type}_${videoTitle || "video"}.${ext}`.slice(0, 64);
 
-    const params = new URLSearchParams({
-      url:      item.url,
-      filename: filename.replace(`.${ext}`, ''),
-      hd:       '1',
-    });
+    const backendUrl = 'https://snapdin-backend-production.up.railway.app';
+    const params = new URLSearchParams({ url: item.url, filename: filename.replace(`.${ext}`, ''), hd: '1' });
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `/api/download-file?${params}`);
+    xhr.open("GET", `${backendUrl}/api/download-file?${params}`);
     xhr.responseType = "blob";
 
     setProgress(0);
@@ -80,7 +77,8 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
     };
 
     xhr.onload = () => {
-      const blob = new Blob([xhr.response], { type: item.type === 'mp3' ? 'audio/mpeg' : item.type === 'cover' ? 'image/jpeg' : 'video/mp4' });
+      const mimeMap = { no_watermark: 'video/mp4', watermark: 'video/mp4', mp3: 'audio/mpeg', cover: 'image/jpeg' };
+      const blob = new Blob([xhr.response], { type: mimeMap[item.type] || 'video/mp4' });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = filename;
