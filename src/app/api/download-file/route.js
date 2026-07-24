@@ -7,7 +7,7 @@ export async function GET(request) {
 
   if (!url) return NextResponse.json({ error: 'Missing url' }, { status: 400 });
 
-  const backendUrl = process.env.API_URL || 'https://snapdinbackend-sntq9t38.b4a.run';
+  const backendUrl = process.env.API_URL || 'https://snapdinbackend-k2zgqenw.b4a.run';
   const params = new URLSearchParams({ url, filename });
 
   const res = await fetch(`${backendUrl}/api/download-file?${params}`, { cache: 'no-store' });
