@@ -5,12 +5,17 @@ export async function GET(request) {
   const url = searchParams.get('url');
   const filename = searchParams.get('filename') || 'snapdin_video';
 
+  const hd = searchParams.get('hd') || '1';
+
   if (!url) return NextResponse.json({ error: 'Missing url' }, { status: 400 });
 
   const backendUrl = process.env.API_URL || 'https://snapdinbackend-k2zgqenw.b4a.run';
-  const params = new URLSearchParams({ url, filename });
+  const params = new URLSearchParams({ url, filename, hd });
 
-  const res = await fetch(`${backendUrl}/api/download-file?${params}`, { cache: 'no-store' });
+  const res = await fetch(`${backendUrl}/api/download-file?${params}`, {
+    cache: 'no-store',
+    headers: { 'X-Quality': 'hd', 'X-HD': '1' },
+  });
 
   const headers = new Headers();
   headers.set('Content-Disposition', res.headers.get('Content-Disposition') || `attachment; filename="${filename}"`);

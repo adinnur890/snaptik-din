@@ -23,6 +23,7 @@ function DownloadButton({ item, videoTitle }) {
     const params = new URLSearchParams({
       url:      item.url,
       filename: `snapdin_${item.type}_${videoTitle || "video"}`.slice(0, 60),
+      hd:       '1',
     });
 
     window.open(`/api/download-file?${params}`, "_blank", "noopener,noreferrer");

@@ -8,7 +8,7 @@ export async function POST(request) {
     const res = await fetch(`${backendUrl}/api/download`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ ...body, hd: true }),
       cache: 'no-store',
     });
 
