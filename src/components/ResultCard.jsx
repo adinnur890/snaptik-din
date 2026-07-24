@@ -20,15 +20,12 @@ function DownloadButton({ item, videoTitle }) {
   const handleClick = () => {
     if (!item.url || item.url === "#") return;
 
-    // Route through our backend proxy so the browser gets
-    // Content-Disposition: attachment and triggers a real download
-    const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
     const params = new URLSearchParams({
       url:      item.url,
       filename: `snapdin_${item.type}_${videoTitle || "video"}`.slice(0, 60),
     });
 
-    window.open(`${API}/api/download-file?${params}`, "_blank", "noopener,noreferrer");
+    window.open(`/api/download-file?${params}`, "_blank", "noopener,noreferrer");
   };
 
   return (
