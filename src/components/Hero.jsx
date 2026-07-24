@@ -9,16 +9,16 @@ import FakeOrb from "./FakeOrb";
 
 /* ── Feature badges ────────────────────────────────────────── */
 const BADGES = [
-  { icon: <Zap size={11} />,    label: "Lightning Fast", color: "#FE2C55" },
-  { icon: <Shield size={11} />, label: "100% Secure",    color: "#25F4EE" },
-  { icon: <Globe size={11} />,  label: "No Limits",      color: "#a78bfa" },
-  { icon: <Film size={11} />,   label: "HD Quality",     color: "#34d399" },
+  { icon: <Zap size={11} />,    label: "Cepat",         color: "#FE2C55" },
+  { icon: <Shield size={11} />, label: "Tanpa Login",   color: "#25F4EE" },
+  { icon: <Globe size={11} />,  label: "Gratis",        color: "#a78bfa" },
+  { icon: <Film size={11} />,   label: "HD",            color: "#34d399" },
 ];
 
 const STATS = [
-  { value: "10M+", label: "Downloads" },
-  { value: "4K",   label: "HD Quality" },
-  { value: "< 3s", label: "Avg Speed"  },
+  { value: "HD",   label: "Kualitas" },
+  { value: "0",    label: "Watermark" },
+  { value: "Free", label: "Selamanya" },
 ];
 
 /* ── Tilt card — mouse parallax, desktop only ──────────────── */
@@ -115,7 +115,7 @@ export default function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium glass border border-white/8 text-[#A1A1AA] animate-badge">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#25F4EE] animate-pulse flex-shrink-0" />
-                Free · No account required · No watermark
+                Gratis · Tanpa akun · Tanpa watermark
               </span>
             </motion.div>
 
@@ -130,7 +130,7 @@ export default function Hero() {
               <br />
               <span className="relative inline-block">
                 <span className="gradient-text animate-gradient bg-gradient-to-r from-[#FE2C55] via-[#ff6b8a] to-[#25F4EE]">
-                  Without Watermark
+                  Tanpa Watermark
                 </span>
                 {/* Glow underline */}
                 <span
@@ -148,8 +148,7 @@ export default function Hero() {
               transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="text-[#71717A] text-base sm:text-lg leading-relaxed mb-8 max-w-md"
             >
-              The fastest TikTok downloader on the web. HD quality, zero watermark,
-              works on every device — completely free.
+              Simpel, cepat, dan gratis. Paste link TikTok kamu dan langsung download — tanpa ribet, tanpa iklan ganggu.
             </motion.p>
 
             {/* Download card */}

@@ -156,8 +156,7 @@ export default function Footer() {
               </motion.a>
 
               <p className="text-sm text-[#71717A] leading-relaxed mb-6 max-w-[220px]">
-                Download TikTok videos without watermark in seconds. Fast, secure,
-                free, and easy to use.
+                Download video TikTok tanpa watermark, gratis dan tanpa perlu login.
               </p>
 
               {/* GitHub social icon */}
