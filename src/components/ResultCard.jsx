@@ -77,7 +77,8 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
 
     xhr.onload = () => {
       const blob = xhr.response;
-      const ext  = item.url.match(/\.(mp4|mp3|jpg|jpeg|png|webp)/i)?.[1] || (item.type === "mp3" ? "mp3" : "mp4");
+      const extMap = { no_watermark: 'mp4', watermark: 'mp4', mp3: 'mp3', cover: 'jpg' };
+      const ext  = extMap[item.type] || 'mp4';
       const a    = document.createElement("a");
       a.href     = URL.createObjectURL(blob);
       a.download = `snapdin_${item.type}_${videoTitle || "video"}.${ext}`.slice(0, 64);
