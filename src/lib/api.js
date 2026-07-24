@@ -34,10 +34,10 @@ function mapToUiShape(data) {
       verified: false,
     },
     downloads: [
-      { label: "No Watermark",  quality: "HD",     type: "no_watermark", url: data.downloads.nowm  },
-      { label: "With Watermark",quality: "HD",     type: "watermark",    url: data.downloads.wm    },
-      { label: "MP3 Audio",     quality: "128kbps",type: "mp3",          url: data.downloads.mp3   },
-      { label: "Cover Image",   quality: "JPG",    type: "cover",        url: data.downloads.cover },
+      { label: "No Watermark",  quality: data.isHd ? "HD" : "SD", type: "no_watermark", url: data.downloads.nowm  },
+      { label: "With Watermark",quality: data.isHd ? "HD" : "SD", type: "watermark",    url: data.downloads.wm    },
+      { label: "MP3 Audio",     quality: "128kbps",               type: "mp3",          url: data.downloads.mp3   },
+      { label: "Cover Image",   quality: "JPG",                   type: "cover",        url: data.downloads.cover },
     ],
   };
 }
