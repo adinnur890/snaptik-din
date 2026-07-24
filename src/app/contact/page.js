@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, GitFork, Mail, MessageCircle, Send, ExternalLink, Zap } from "lucide-react";
+import { ArrowLeft, GitFork, Mail, MessageCircle, Send, ExternalLink, Zap, Coffee } from "lucide-react";
 import Link from "next/link";
 
 const fadeUp = (delay = 0) => ({
@@ -47,16 +47,15 @@ const CONTACTS = [
     disabled: false,
   },
   {
-    icon:    <Send size={22} />,
-    label:   "Telegram",
-    value:   "Coming Soon",
-    href:    null,
-    color:   "#38bdf8",
-    bg:      "rgba(56,189,248,0.06)",
-    border:  "rgba(56,189,248,0.15)",
-    external: false,
-    cta:     "Coming Soon",
-    disabled: true,
+    icon:    <Coffee size={22} />,
+    label:   "Saweria",
+    value:   "saweria.co/snapdin",
+    href:    "https://saweria.co/snapdin",
+    color:   "#f59e0b",
+    bg:      "rgba(245,158,11,0.06)",
+    border:  "rgba(245,158,11,0.15)",
+    external: true,
+    cta:     "Dukung SnapDin ☕",
   },
 ];
 
