@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Mail, MessageCircle, Send, ExternalLink, Zap, Coffee } from "lucide-react";
+import { ArrowLeft, Mail, MessageCircle, Send, ExternalLink, Zap, Coffee, AlertCircle, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
 const fadeUp = (delay = 0) => ({
@@ -59,6 +60,103 @@ const CONTACTS = [
     disabled: false,
   },
 ];
+
+function FeedbackForm() {
+  const [form, setForm] = useState({ name: '', email: '', type: 'feedback', message: '' });
+  const [status, setStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+    try {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus('success');
+      setForm({ name: '', email: '', type: 'feedback', message: '' });
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  const inputClass = "w-full bg-[#111111] border border-[#27272A] rounded-xl px-4 py-3 text-sm text-white placeholder-[#3F3F46] focus:outline-none focus:border-[#FE2C55] transition-colors";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="glass rounded-2xl p-8 sm:p-10 mb-8"
+    >
+      <h2 className="text-2xl font-bold text-white mb-2">Feedback & Bug Report</h2>
+      <p className="text-[#71717A] text-sm mb-7">Ada bug atau saran? Langsung kirim ke sini!</p>
+
+      {status === 'success' ? (
+        <div className="flex flex-col items-center gap-3 py-8">
+          <CheckCircle size={40} className="text-[#25F4EE]" />
+          <p className="text-white font-medium">Terima kasih! Pesan kamu sudah terkirim 🙏</p>
+          <button onClick={() => setStatus(null)} className="text-xs text-[#71717A] hover:text-white transition-colors">Kirim lagi</button>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="text"
+              placeholder="Nama kamu *"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              required
+              className={inputClass}
+            />
+            <input
+              type="email"
+              placeholder="Email (opsional)"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className={inputClass}
+            />
+          </div>
+          <select
+            value={form.type}
+            onChange={(e) => setForm({ ...form, type: e.target.value })}
+            className={inputClass}
+          >
+            <option value="feedback">💬 Feedback</option>
+            <option value="bug">🐛 Bug Report</option>
+            <option value="suggestion">💡 Saran Fitur</option>
+            <option value="other">📩 Lainnya</option>
+          </select>
+          <textarea
+            placeholder="Tulis pesan kamu... *"
+            value={form.message}
+            onChange={(e) => setForm({ ...form, message: e.target.value })}
+            required
+            rows={4}
+            className={inputClass + " resize-none"}
+          />
+          {status === 'error' && (
+            <p className="flex items-center gap-2 text-sm text-red-400">
+              <AlertCircle size={14} /> Gagal kirim. Coba lagi.
+            </p>
+          )}
+          <motion.button
+            type="submit"
+            disabled={status === 'loading'}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            className="btn-gradient py-3.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
+          >
+            {status === 'loading' ? 'Mengirim...' : 'Kirim Pesan 🚀'}
+          </motion.button>
+        </form>
+      )}
+    </motion.div>
+  );
+}
 
 function ContactCard({ card, index }) {
   return (
@@ -165,6 +263,9 @@ export default function ContactPage() {
             <ContactCard key={card.label} card={card} index={i} />
           ))}
         </div>
+
+        {/* Feedback Form */}
+        <FeedbackForm />
 
         {/* Saweria CTA */}
         <motion.div
