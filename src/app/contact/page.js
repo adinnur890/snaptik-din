@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, GitFork, Mail, MessageCircle, Send, ExternalLink, Zap, Coffee } from "lucide-react";
+import { ArrowLeft, Mail, MessageCircle, Send, ExternalLink, Zap, Coffee } from "lucide-react";
 import Link from "next/link";
 
 const fadeUp = (delay = 0) => ({
@@ -166,7 +166,7 @@ export default function ContactPage() {
           ))}
         </div>
 
-        {/* Large GitHub CTA */}
+        {/* Saweria CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -174,23 +174,23 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
           className="glass rounded-2xl p-8 sm:p-10 text-center"
         >
-          <div className="w-12 h-12 rounded-xl btn-gradient flex items-center justify-center mx-auto mb-5 shadow-lg">
-            <GitFork size={22} className="text-white" />
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-5 shadow-lg" style={{ background: "rgba(245,158,11,0.15)" }}>
+            <Coffee size={22} className="text-[#f59e0b]" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Open source on GitHub
+            Dukung SnapDin ☕
           </h2>
           <p className="text-[#A1A1AA] text-sm sm:text-base max-w-md mx-auto mb-7 leading-relaxed">
-            Found a bug or want to contribute? Everything is open.
+            Kalau SnapDin berguna buat kamu, traktir kopi biar terus berkembang!
           </p>
           <a
-            href="https://github.com/adinnur890"
+            href="https://saweria.co/snapdin"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-gradient inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold text-white shadow-lg"
           >
-            <GitFork size={16} />
-            github.com/adinnur890
+            <Coffee size={16} />
+            saweria.co/snapdin
             <ExternalLink size={13} className="opacity-70" />
           </a>
         </motion.div>
