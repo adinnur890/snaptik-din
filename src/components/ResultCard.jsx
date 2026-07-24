@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import Image from "next/image";
 import {
   Download, Music, Image as ImageIcon,
-  Eye, Clock, Heart, Share2, BadgeCheck, Droplets,
+  Eye, Clock, Heart, Share2, BadgeCheck, Droplets, Play,
 } from "lucide-react";
 
 const DOWNLOAD_ICONS = {
@@ -161,6 +161,8 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
 export default function ResultCard({ data }) {
   if (!data) return null;
   const { title, author, thumbnail, duration, views, likes, shares, downloads, videoUrl } = data;
+  const previewUrl = downloads.find(d => d.type === 'no_watermark')?.url;
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <motion.div
@@ -185,13 +187,44 @@ export default function ResultCard({ data }) {
 
         {/* Top: thumbnail + meta */}
         <div className="flex gap-4 p-5">
-          <div className="relative flex-shrink-0 w-24 h-40 sm:w-28 sm:h-48 rounded-xl overflow-hidden bg-[#1A1A1A]"
+          <div
+            className="relative flex-shrink-0 w-24 h-40 sm:w-28 sm:h-48 rounded-xl overflow-hidden bg-[#1A1A1A] cursor-pointer"
             style={{ boxShadow: "0 4px 16px rgba(0,0,0,0.4)" }}
+            onClick={() => previewUrl && setIsPlaying(p => !p)}
           >
-            <Image src={thumbnail} alt={title} fill sizes="(max-width:640px) 96px, 112px" className="object-cover" unoptimized />
-            <span className="absolute bottom-2 right-2 bg-black/75 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-md backdrop-blur-sm flex items-center gap-1">
-              <Clock size={9} />{duration}
-            </span>
+            <AnimatePresence mode="wait">
+              {isPlaying ? (
+                <motion.video
+                  key="video"
+                  src={previewUrl}
+                  autoPlay
+                  controls
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={e => e.stopPropagation()}
+                />
+              ) : (
+                <motion.div key="thumb" className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Image src={thumbnail} alt={title} fill sizes="(max-width:640px) 96px, 112px" className="object-cover" unoptimized />
+                  {previewUrl && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                        <Play size={16} className="text-white ml-0.5" fill="white" />
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {!isPlaying && (
+              <span className="absolute bottom-2 right-2 bg-black/75 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-md backdrop-blur-sm flex items-center gap-1 z-10">
+                <Clock size={9} />{duration}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col justify-between flex-1 min-w-0 py-0.5">
