@@ -9,7 +9,7 @@ export async function GET(request) {
 
   if (!url) return NextResponse.json({ error: 'Missing url' }, { status: 400 });
 
-  const backendUrl = process.env.API_URL || 'https://snapdinbackend-k2zgqenw.b4a.run';
+  const backendUrl = process.env.API_URL || 'https://snapdin-backend-production.up.railway.app';
   const params = new URLSearchParams({ url, filename, hd });
 
   const res = await fetch(`${backendUrl}/api/download-file?${params}`, {

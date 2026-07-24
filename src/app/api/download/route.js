@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try {
     const body = await request.json();
-    const backendUrl = process.env.API_URL || 'https://snapdinbackend-k2zgqenw.b4a.run';
+    const backendUrl = process.env.API_URL || 'https://snapdin-backend-production.up.railway.app';
 
     const res = await fetch(`${backendUrl}/api/download`, {
       method: 'POST',
