@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 const FAQS = [
   {
@@ -98,12 +99,12 @@ export default function FAQ() {
             <p className="text-[#A1A1AA] text-sm sm:text-base leading-relaxed mb-6">
               Can't find what you're looking for? Reach out to our support team.
             </p>
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium border border-[#27272A] hover:border-[#3F3F46] hover:bg-[#111111] rounded-lg text-white transition-all duration-200 focus-ring"
             >
               Contact Support
-            </a>
+            </Link>
           </motion.div>
 
           {/* Right: accordion */}
