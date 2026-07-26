@@ -18,7 +18,7 @@ const api = axios.create({
                 thumbnail, duration, views, likes, shares, downloads: [...] }
 ────────────────────────────────────────────────────────────────────────────── */
 function mapToUiShape(data) {
-  const images = data.images || null;
+  const images = data.images ? data.images.map(proxyImageUrl) : null;
   const downloads = [];
   if (!images) {
     downloads.push({ label: "No Watermark",   quality: data.isHd ? "HD" : "SD", type: "no_watermark", url: data.downloads.nowm  });
@@ -73,8 +73,8 @@ export function isValidTikTokUrl(url) {
 
 export function proxyImageUrl(url) {
   if (!url) return '';
-  const isInstagramCdn = url.includes('cdninstagram.com') || url.includes('fbcdn.net');
-  if (!isInstagramCdn) return url;
+  const needsProxy = url.includes('cdninstagram.com') || url.includes('fbcdn.net') || url.includes('tiktokcdn') || url.includes('tiktokcdn-us');
+  if (!needsProxy) return url;
   const backend = 'https://snapdin-backend-production.up.railway.app';
   return `${backend}/api/proxy-image?url=${encodeURIComponent(url)}`;
 }
