@@ -74,6 +74,21 @@ export default function InstagramPage() {
       <Navbar />
       <main className="min-h-screen pt-24 pb-16 px-4">
         <div className="max-w-xl mx-auto">
+          {/* Back button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="mb-6"
+          >
+            <button
+              onClick={() => router.push('/')}
+              className="inline-flex items-center gap-1.5 text-xs text-[#52525B] hover:text-white transition-colors"
+            >
+              <ArrowLeft size={13} /> Back to TikTok Downloader
+            </button>
+          </motion.div>
+
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -81,12 +96,6 @@ export default function InstagramPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-10"
           >
-            <button
-              onClick={() => router.push('/')}
-              className="inline-flex items-center gap-1.5 mb-6 text-xs text-[#52525B] hover:text-white transition-colors"
-            >
-              <ArrowLeft size={13} /> Back to TikTok Downloader
-            </button>
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
               style={{ background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}
             >
@@ -121,7 +130,7 @@ export default function InstagramPage() {
                     <input
                       type="url"
                       value={url}
-                      onChange={(e) => { setUrl(e.target.value); setError(""); }}
+                      onChange={(e) => { setUrl(e.target.value); setError(""); setResult(null); }}
                       onFocus={() => setFocused(true)}
                       onBlur={() => setFocused(false)}
                       placeholder="Paste URL Instagram Reels / Video..."
