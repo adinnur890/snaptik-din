@@ -78,11 +78,19 @@ export function proxyImageUrl(url) {
   return `${backend}/api/proxy-image?url=${encodeURIComponent(url)}`;
 }
 
+function proxyCdnUrl(url) {
+  if (!url) return '';
+  const isInstagramCdn = url.includes('cdninstagram.com') || url.includes('fbcdn.net');
+  if (!isInstagramCdn) return url;
+  const backend = 'https://snapdin-backend-production.up.railway.app';
+  return `${backend}/api/proxy-video?url=${encodeURIComponent(url)}`;
+}
+
 export function mapInstagramToUiShape(data) {
   const quality = data.isHd ? 'HD' : 'SD';
   const proxiedThumb = proxyImageUrl(data.thumbnail || data.downloads.cover || '');
   const downloads = [];
-  if (data.downloads.nowm) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: data.downloads.nowm });
+  if (data.downloads.nowm) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: proxyCdnUrl(data.downloads.nowm) });
   if (data.downloads.cover) downloads.push({ label: 'Cover Image', quality: 'JPG', type: 'cover', url: proxyImageUrl(data.downloads.cover) });
   if (downloads.length === 0) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: '' });
   return {

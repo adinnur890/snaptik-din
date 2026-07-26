@@ -161,9 +161,7 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
 export default function ResultCard({ data }) {
   if (!data) return null;
   const { title, author, thumbnail, duration, views, likes, shares, downloads, videoUrl } = data;
-  const rawPreviewUrl = downloads.find(d => d.type === 'no_watermark')?.url;
-  // Instagram CDN blocks direct embed — only allow preview for non-Instagram URLs
-  const previewUrl = rawPreviewUrl && !rawPreviewUrl.includes('cdninstagram.com') && !rawPreviewUrl.includes('fbcdn.net') ? rawPreviewUrl : null;
+  const previewUrl = downloads.find(d => d.type === 'no_watermark')?.url || null;
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
