@@ -161,7 +161,7 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
 export default function ResultCard({ data }) {
   if (!data) return null;
   const { title, author, thumbnail, duration, views, likes, shares, downloads, videoUrl, images } = data;
-  const previewUrl = downloads.find(d => d.type === 'no_watermark')?.url || null;
+  const previewUrl = !images && (downloads.find(d => d.type === 'no_watermark')?.url || null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
