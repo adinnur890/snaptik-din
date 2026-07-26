@@ -88,7 +88,7 @@ export default function InstagramPage() {
               Instagram <span className="gradient-text">Downloader</span>
             </h1>
             <p className="text-[#71717A] text-sm sm:text-base">
-              Download Reels, video, dan foto Instagram gratis tanpa watermark
+              Paste any Instagram link and download instantly — no account, no watermark, no nonsense.
             </p>
           </motion.div>
 
