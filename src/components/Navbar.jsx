@@ -6,9 +6,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Coffee, Menu, Zap } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Features", href: "#features", type: "anchor" },
-  { label: "FAQ",      href: "#faq",      type: "anchor" },
-  { label: "Contact",  href: "/contact",  type: "page" },
+  { label: "Instagram", href: "/instagram", type: "page" },
+  { label: "Features",  href: "#features",  type: "anchor" },
+  { label: "FAQ",       href: "#faq",       type: "anchor" },
+  { label: "Contact",   href: "/contact",   type: "page" },
 ];
 
 export default function Navbar() {
