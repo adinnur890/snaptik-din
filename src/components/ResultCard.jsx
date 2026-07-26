@@ -267,22 +267,43 @@ export default function ResultCard({ data }) {
         {/* Image grid for slideshow/carousel posts */}
         {images && images.length > 0 && (
           <div className="px-5 pt-5">
-            <p className="text-[10px] font-semibold text-[#3F3F46] uppercase tracking-widest mb-3">
-              Images ({images.length})
-            </p>
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-[10px] font-semibold text-[#3F3F46] uppercase tracking-widest">
+                Images ({images.length})
+              </p>
+              <button
+                onClick={() => images.forEach((imgUrl, i) => {
+                  const a = document.createElement('a');
+                  a.href = imgUrl;
+                  a.download = `snapdin_image_${i + 1}.jpg`;
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                })}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white border border-white/8 hover:border-white/14 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] transition-all"
+              >
+                <Download size={11} /> Download All
+              </button>
+            </div>
             <div className="grid grid-cols-3 gap-2">
               {images.map((imgUrl, i) => (
                 <div key={i} className="relative aspect-square rounded-lg overflow-hidden bg-[#1A1A1A] group">
                   <img src={imgUrl} alt={`Slide ${i + 1}`} className="w-full h-full object-cover" />
-                  <a
-                    href={imgUrl}
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => {
+                      const backendUrl = 'https://snapdin-backend-production.up.railway.app';
+                      const params = new URLSearchParams({ url: imgUrl, filename: `snapdin_image_${i + 1}` });
+                      const a = document.createElement('a');
+                      a.href = `${backendUrl}/api/download-file?${params}`;
+                      a.download = `snapdin_image_${i + 1}.jpg`;
+                      document.body.appendChild(a);
+                      a.click();
+                      document.body.removeChild(a);
+                    }}
                     className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <Download size={18} className="text-white" />
-                  </a>
+                  </button>
                 </div>
               ))}
             </div>
