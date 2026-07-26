@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ClipboardPaste, Download, AlertCircle, X, Camera } from "lucide-react";
+import { ClipboardPaste, Download, AlertCircle, X, Camera, ArrowLeft } from "lucide-react";
 import { mapInstagramToUiShape } from "@/lib/api";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
@@ -31,6 +32,7 @@ export default function InstagramPage() {
   const [error,   setError]   = useState("");
   const [result,  setResult]  = useState(null);
   const [focused, setFocused] = useState(false);
+  const router = useRouter();
 
   const handlePaste = async () => {
     try {
@@ -79,6 +81,12 @@ export default function InstagramPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-10"
           >
+            <button
+              onClick={() => router.push('/')}
+              className="inline-flex items-center gap-1.5 mb-6 text-xs text-[#52525B] hover:text-white transition-colors"
+            >
+              <ArrowLeft size={13} /> Back to TikTok Downloader
+            </button>
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
               style={{ background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}
             >
@@ -124,7 +132,7 @@ export default function InstagramPage() {
                       {url && !loading && (
                         <motion.button
                           type="button"
-                          onClick={() => { setUrl(""); setError(""); }}
+                          onClick={() => { setUrl(""); setError(""); setResult(null); }}
                           initial={{ opacity: 0, scale: 0.7 }}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.7 }}
