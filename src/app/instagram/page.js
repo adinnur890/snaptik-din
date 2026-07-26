@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ClipboardPaste, Download, AlertCircle, X, Camera } from "lucide-react";
+import { mapInstagramToUiShape } from "@/lib/api";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -54,8 +55,7 @@ export default function InstagramPage() {
     setLoading(true);
     try {
       const data = await fetchInstagramInfo(trimmed);
-      console.log('Instagram result:', JSON.stringify(data));
-      setResult(data);
+      setResult(mapInstagramToUiShape(data));
     } catch (err) {
       const msg = err?.message || "Gagal mengambil video. Coba lagi.";
       toast.error(msg);
