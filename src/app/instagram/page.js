@@ -139,17 +139,13 @@ export default function InstagramPage() {
                     />
                     <AnimatePresence>
                       {url && !loading && (
-                        <motion.button
+                        <button
                           type="button"
                           onClick={() => { setUrl(""); setError(""); setResult(null); }}
-                          initial={{ opacity: 0, scale: 0.7 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.7 }}
-                          transition={{ duration: 0.12 }}
                           className="p-1.5 text-[#3F3F46] hover:text-[#A1A1AA] rounded-md transition-colors flex-shrink-0"
                         >
                           <X size={14} />
-                        </motion.button>
+                        </button>
                       )}
                     </AnimatePresence>
                     <button
