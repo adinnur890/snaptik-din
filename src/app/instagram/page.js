@@ -223,19 +223,22 @@ export default function InstagramPage() {
           </motion.div>
 
           {/* Result */}
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {result && (
-              <>
+              <motion.div
+                key={result.title}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
                 <ResultCard data={result} />
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  onClick={() => { setResult(null); setUrl(""); }}
+                <button
+                  onClick={() => { setResult(null); setUrl(""); setError(""); }}
                   className="w-full mt-3 py-2.5 rounded-xl text-sm text-[#71717A] hover:text-white border border-white/8 hover:border-white/14 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-200"
                 >
                   ← Download video lain
-                </motion.button>
-              </>
+                </button>
+              </motion.div>
             )}
           </AnimatePresence>
 
