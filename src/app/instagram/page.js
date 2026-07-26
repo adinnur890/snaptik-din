@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ClipboardPaste, Download, AlertCircle, X, Instagram } from "lucide-react";
+import { ClipboardPaste, Download, AlertCircle, X, Camera } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -81,7 +81,7 @@ export default function InstagramPage() {
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
               style={{ background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}
             >
-              <Instagram size={26} className="text-white" />
+              <Camera size={26} className="text-white" />
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-3">
               Instagram <span className="gradient-text">Downloader</span>
@@ -108,7 +108,7 @@ export default function InstagramPage() {
               <div className="glass-strong rounded-2xl overflow-hidden">
                 <form onSubmit={handleSubmit} noValidate>
                   <div className="flex items-center gap-2 px-4 py-1">
-                    <Instagram size={13} className="text-[#2A2A2E] flex-shrink-0" />
+                    <Camera size={13} className="text-[#2A2A2E] flex-shrink-0" />
                     <input
                       type="url"
                       value={url}
