@@ -93,8 +93,8 @@ export function mapInstagramToUiShape(data) {
   const images = data.images ? data.images.map(proxyImageUrl) : null;
   const downloads = [];
   if (!images && data.downloads.nowm) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: proxyCdnUrl(data.downloads.nowm) });
-  if (data.downloads.cover) downloads.push({ label: 'Cover Image', quality: 'JPG', type: 'cover', url: proxyImageUrl(data.downloads.cover) });
-  if (downloads.length === 0) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: '' });
+  if (data.downloads.cover) downloads.push({ label: 'Save Image', quality: 'JPG', type: 'cover', url: proxyImageUrl(data.downloads.cover) });
+  if (downloads.length === 0) downloads.push({ label: 'Download', quality, type: 'no_watermark', url: '' });
   return {
     title:     data.title,
     thumbnail: proxiedThumb,
