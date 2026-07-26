@@ -54,6 +54,7 @@ export default function InstagramPage() {
     setLoading(true);
     try {
       const data = await fetchInstagramInfo(trimmed);
+      console.log('Instagram result:', JSON.stringify(data));
       setResult(data);
     } catch (err) {
       const msg = err?.message || "Gagal mengambil video. Coba lagi.";
