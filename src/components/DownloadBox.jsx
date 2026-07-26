@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { fetchVideoInfo, isValidTikTokUrl } from "@/lib/api";
 import Loading from "./Loading";
 
-export default function DownloadBox({ onResult }) {
+export default function DownloadBox({ onResult, onClear }) {
   const [url,     setUrl]     = useState("");
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
@@ -23,7 +23,7 @@ export default function DownloadBox({ onResult }) {
     }
   };
 
-  const handleClear  = () => { setUrl(""); setError(""); };
+  const handleClear  = () => { setUrl(""); setError(""); onClear?.(); };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

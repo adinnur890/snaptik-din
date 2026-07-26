@@ -159,7 +159,7 @@ export default function Hero() {
               className="group"
             >
               <TiltCard>
-                <DownloadBox onResult={setResult} />
+                <DownloadBox onResult={setResult} onClear={() => setResult(null)} />
               </TiltCard>
             </motion.div>
 
