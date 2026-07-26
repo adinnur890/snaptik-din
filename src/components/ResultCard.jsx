@@ -209,7 +209,11 @@ export default function ResultCard({ data }) {
                 />
               ) : (
                 <motion.div key="thumb" className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <Image src={thumbnail} alt={title} fill sizes="(max-width:640px) 96px, 112px" className="object-cover" unoptimized />
+                  {thumbnail ? (
+                    <img src={thumbnail} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <div className="absolute inset-0 bg-[#1A1A1A]" />
+                  )}
                   {previewUrl && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                       <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
