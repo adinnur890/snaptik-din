@@ -75,6 +75,8 @@ export function mapInstagramToUiShape(data) {
   const downloads = [];
   if (data.downloads.nowm) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: data.downloads.nowm });
   if (data.downloads.cover) downloads.push({ label: 'Cover Image', quality: 'JPG', type: 'cover', url: data.downloads.cover });
+  // Always show download button even if no specific URL yet
+  if (downloads.length === 0) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: '' });
   return {
     title:     data.title,
     thumbnail: data.thumbnail || data.downloads.cover || '',
