@@ -231,6 +231,15 @@ export default function InstagramPage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
+                <div className="flex items-center justify-between mt-5 mb-1">
+                  <span className="text-xs text-[#52525B]">Result</span>
+                  <button
+                    onClick={() => { setResult(null); setUrl(""); setError(""); }}
+                    className="flex items-center gap-1 text-xs text-[#52525B] hover:text-white transition-colors"
+                  >
+                    <X size={12} /> Clear
+                  </button>
+                </div>
                 <ResultCard data={result} />
                 <button
                   onClick={() => { setResult(null); setUrl(""); setError(""); }}
