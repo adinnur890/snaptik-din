@@ -70,16 +70,24 @@ export function isValidTikTokUrl(url) {
   return /^https?:\/\/(www\.|vm\.|vt\.)?tiktok\.com\//i.test(url.trim());
 }
 
+export function proxyImageUrl(url) {
+  if (!url) return '';
+  const isInstagramCdn = url.includes('cdninstagram.com') || url.includes('fbcdn.net');
+  if (!isInstagramCdn) return url;
+  const backend = 'https://snapdin-backend-production.up.railway.app';
+  return `${backend}/api/proxy-image?url=${encodeURIComponent(url)}`;
+}
+
 export function mapInstagramToUiShape(data) {
   const quality = data.isHd ? 'HD' : 'SD';
+  const proxiedThumb = proxyImageUrl(data.thumbnail || data.downloads.cover || '');
   const downloads = [];
   if (data.downloads.nowm) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: data.downloads.nowm });
-  if (data.downloads.cover) downloads.push({ label: 'Cover Image', quality: 'JPG', type: 'cover', url: data.downloads.cover });
-  // Always show download button even if no specific URL yet
+  if (data.downloads.cover) downloads.push({ label: 'Cover Image', quality: 'JPG', type: 'cover', url: proxyImageUrl(data.downloads.cover) });
   if (downloads.length === 0) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: '' });
   return {
     title:     data.title,
-    thumbnail: data.thumbnail || data.downloads.cover || '',
+    thumbnail: proxiedThumb,
     duration:  data.duration,
     videoUrl:  data.videoUrl || '',
     views: null, likes: null, shares: null,
