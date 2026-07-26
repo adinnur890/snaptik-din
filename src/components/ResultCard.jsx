@@ -160,7 +160,7 @@ function DownloadButton({ item, videoTitle, videoUrl }) {
 
 export default function ResultCard({ data }) {
   if (!data) return null;
-  const { title, author, thumbnail, duration, views, likes, shares, downloads, videoUrl } = data;
+  const { title, author, thumbnail, duration, views, likes, shares, downloads, videoUrl, images } = data;
   const previewUrl = downloads.find(d => d.type === 'no_watermark')?.url || null;
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -263,6 +263,31 @@ export default function ResultCard({ data }) {
 
         {/* Divider */}
         <div className="h-px mx-5" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)" }} />
+
+        {/* Image grid for slideshow/carousel posts */}
+        {images && images.length > 0 && (
+          <div className="px-5 pt-5">
+            <p className="text-[10px] font-semibold text-[#3F3F46] uppercase tracking-widest mb-3">
+              Images ({images.length})
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              {images.map((imgUrl, i) => (
+                <div key={i} className="relative aspect-square rounded-lg overflow-hidden bg-[#1A1A1A] group">
+                  <img src={imgUrl} alt={`Slide ${i + 1}`} className="w-full h-full object-cover" />
+                  <a
+                    href={imgUrl}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Download size={18} className="text-white" />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Download buttons */}
         <div className="p-5 flex flex-col gap-2.5">

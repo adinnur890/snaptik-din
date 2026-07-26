@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Coffee, Menu, Zap } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "TikTok",    href: "/",          type: "page" },
   { label: "Instagram", href: "/instagram", type: "page" },
   { label: "Features",  href: "#features",  type: "anchor" },
   { label: "FAQ",       href: "#faq",       type: "anchor" },

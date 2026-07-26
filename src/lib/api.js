@@ -18,27 +18,28 @@ const api = axios.create({
                 thumbnail, duration, views, likes, shares, downloads: [...] }
 ────────────────────────────────────────────────────────────────────────────── */
 function mapToUiShape(data) {
+  const images = data.images || null;
+  const downloads = [];
+  if (!images) {
+    downloads.push({ label: "No Watermark",   quality: data.isHd ? "HD" : "SD", type: "no_watermark", url: data.downloads.nowm  });
+    downloads.push({ label: "With Watermark", quality: data.isHd ? "HD" : "SD", type: "watermark",    url: data.downloads.wm    });
+  }
+  downloads.push({ label: "MP3 Audio",   quality: "128kbps", type: "mp3",   url: data.downloads.mp3   });
+  downloads.push({ label: "Cover Image", quality: "JPG",     type: "cover", url: data.downloads.cover });
   return {
     title:     data.title,
     thumbnail: data.thumbnail,
     duration:  data.duration,
     videoUrl:  data.videoUrl || '',
-    // Backend doesn't return social stats yet — hide them gracefully
-    views:  null,
-    likes:  null,
-    shares: null,
+    images,
+    views: null, likes: null, shares: null,
     author: {
       username: data.author,
       nickname: data.author,
       avatar:   null,
       verified: false,
     },
-    downloads: [
-      { label: "No Watermark",  quality: data.isHd ? "HD" : "SD", type: "no_watermark", url: data.downloads.nowm  },
-      { label: "With Watermark",quality: data.isHd ? "HD" : "SD", type: "watermark",    url: data.downloads.wm    },
-      { label: "MP3 Audio",     quality: "128kbps",               type: "mp3",          url: data.downloads.mp3   },
-      { label: "Cover Image",   quality: "JPG",                   type: "cover",        url: data.downloads.cover },
-    ],
+    downloads,
   };
 }
 
@@ -89,8 +90,9 @@ function proxyCdnUrl(url) {
 export function mapInstagramToUiShape(data) {
   const quality = data.isHd ? 'HD' : 'SD';
   const proxiedThumb = proxyImageUrl(data.thumbnail || data.downloads.cover || '');
+  const images = data.images ? data.images.map(proxyImageUrl) : null;
   const downloads = [];
-  if (data.downloads.nowm) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: proxyCdnUrl(data.downloads.nowm) });
+  if (!images && data.downloads.nowm) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: proxyCdnUrl(data.downloads.nowm) });
   if (data.downloads.cover) downloads.push({ label: 'Cover Image', quality: 'JPG', type: 'cover', url: proxyImageUrl(data.downloads.cover) });
   if (downloads.length === 0) downloads.push({ label: 'Download Video', quality, type: 'no_watermark', url: '' });
   return {
@@ -98,6 +100,7 @@ export function mapInstagramToUiShape(data) {
     thumbnail: proxiedThumb,
     duration:  data.duration,
     videoUrl:  data.videoUrl || '',
+    images,
     views: null, likes: null, shares: null,
     author: {
       username: data.author,
